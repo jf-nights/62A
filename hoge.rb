@@ -13,7 +13,7 @@ open("62A.txt") do |f|
     data = line.chomp!.split(",")
     damage, assist = data[0].to_i, data[1].to_i
     assist = 0 if assist == "-"
-    
+
     sum = damage + assist
 
     all_damage << damage
@@ -23,8 +23,10 @@ open("62A.txt") do |f|
 end
 
 open("62A_sums.txt", "w") do |f|
-  message = "直近100戦の記録は以下"
-  aves = "#{average(all_damage)},#{average(all_assist)},#{average(all_sum)}"
-  f.write(message + "\n" + aves + "\n\n" + all_sum.join("\n"))
+  f.write(all_sum.join("\n"))
 end
 
+open("62A_recent.txt", "w") do |f|
+  aves = "#{average(all_damage)},#{average(all_assist)},#{average(all_sum)}"
+  f.write(aves)
+end
